@@ -41,7 +41,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     public void configure(org.springframework.security.config.annotation.web.builders.WebSecurity web) throws Exception {
         web
                 .ignoring()
-                .antMatchers(HttpMethod.POST,"/user/create")
+                .antMatchers(HttpMethod.POST,"/user/create","/create-address")
                 .antMatchers(HttpMethod.PATCH,"/user/verify","/user/forgot-password")
                 .antMatchers(HttpMethod.GET,"/user/get-email","/user/get-token");
     }

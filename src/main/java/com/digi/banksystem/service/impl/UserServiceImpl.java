@@ -3,9 +3,12 @@ import com.digi.banksystem.exeptions.BadRequestException;
 import com.digi.banksystem.exeptions.ErrorMessages;
 import com.digi.banksystem.exeptions.NotFoundException;
 import com.digi.banksystem.exeptions.ValidationException;
+import com.digi.banksystem.model.Address;
 import com.digi.banksystem.model.User;
 import com.digi.banksystem.model.enums.Status;
+import com.digi.banksystem.model.requestdto.AddressDTO;
 import com.digi.banksystem.model.requestdto.UserDTO;
+import com.digi.banksystem.repasitory.AddressRepository;
 import com.digi.banksystem.repasitory.UserRepository;
 import com.digi.banksystem.service.UserService;
 import com.digi.banksystem.util.EmailUtil;
@@ -25,6 +28,8 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private AddressRepository addressRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
     @Autowired
@@ -184,6 +189,21 @@ public class UserServiceImpl implements UserService {
         user.setPassword(passwordEncoder.encode(newPassword));
         user.setResetToken(null);
         userRepository.save(user);
+
+
+    }
+
+    @Override
+    public void createAddress(AddressDTO addressDTO) {
+        Address address = new Address();
+        address.setAddress_id(0);
+        address.setCountry(addressDTO.getCountry());
+        address.setStreet(addressDTO.getStreet());
+        address.setCity(addressDTO.getCity());
+        address.setHome(addressDTO.getHome());
+
+
+        addressRepository.save(address);
 
 
     }

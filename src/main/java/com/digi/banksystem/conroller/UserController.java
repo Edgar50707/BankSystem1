@@ -5,6 +5,7 @@ import com.digi.banksystem.exeptions.ErrorMessages;
 import com.digi.banksystem.exeptions.NotFoundException;
 import com.digi.banksystem.exeptions.ValidationException;
 import com.digi.banksystem.model.User;
+import com.digi.banksystem.model.requestdto.AddressDTO;
 import com.digi.banksystem.model.requestdto.UserDTO;
 import com.digi.banksystem.repasitory.UserRepository;
 import com.digi.banksystem.service.UserService;
@@ -83,6 +84,15 @@ public class UserController {
                                             @RequestParam String newPassword,
                                             @RequestParam String confirmPassword) throws ValidationException {
         service.forgotPassword(email,newPassword,confirmPassword);
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("/create-address")
+    public ResponseEntity<?> createAddress(@RequestBody AddressDTO addressDTO) {
+        service.createAddress(addressDTO);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+
+
     }
 
 }

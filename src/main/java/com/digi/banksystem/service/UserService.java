@@ -4,6 +4,7 @@ import com.digi.banksystem.exeptions.BadRequestException;
 import com.digi.banksystem.exeptions.NotFoundException;
 import com.digi.banksystem.exeptions.ValidationException;
 import com.digi.banksystem.model.User;
+import com.digi.banksystem.model.requestdto.AddressDTO;
 import com.digi.banksystem.model.requestdto.UserDTO;
 
 import javax.mail.MessagingException;
@@ -26,4 +27,6 @@ public interface UserService {
     Boolean getToken(String email,String token) throws ValidationException;
 
     void forgotPassword(String email,String newPassword,String confirmPassword) throws ValidationException;
+
+    void createAddress(AddressDTO addressDTO);
 }
